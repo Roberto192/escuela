@@ -1,53 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
-
-#define TRUE 1
-#define FALSE 0
-
-int negacion(int v1, int v2){
-	if (v1 == TRUE && v2 == TRUE){
-		return FALSE;
-	}
-
-	if (v1 == FALSE && v2 == TRUE){
-		return FALSE;
-	}
-
-	return TRUE;
-}
-
-int conjuncion(int v1, int v2){
-	if(v1 == TRUE && v2 == TRUE){
-		return TRUE;
-	}
-
-	return FALSE;
-}
-
-int disyuncion(int v1, int v2){
-
-	if(v1 == FALSE && v2 == FALSE){
-		return FALSE;
-	}
-
-	return TRUE;
-}
-
-int condicional(int v1, int v2){
-	if(v1 == TRUE && v2 == FALSE){
-		return FALSE;
-	}
-
-	return TRUE;
-}
-
-int bicondicional(int v1, int v2){
-	if(v1 == v2){
-		return TRUE;
-	}
-
-	return FALSE;
-}
+#include "condicionales.h"
+#include "ventanas.h"
 
 int main(int argc, char const *argv[])
 {
@@ -57,54 +11,99 @@ int main(int argc, char const *argv[])
 						  {FALSE, TRUE},
 						  {FALSE, FALSE} };
 
-	int datosusuario[4][2];					  
+	int datosusuario[8][2];
+	int len;
+	int variable;	  
 
-	printf("negacion\n");
-	for (int i = 0; i < 4; i++)
-	{
-		printf("%i %i %i\n",datos[i][0],datos[i][1],negacion(datos[i][0],datos[i][1]));
-	}
-	printf("conjuncion\n");
-	for (int i = 0; i < 4; i++)
-	{
-		printf("%i %i %i\n",datos[i][0],datos[i][1],conjuncion(datos[i][0],datos[i][1]));
-	}
-	printf("disyuncion\n");
-	for (int i = 0; i < 4; i++)
-	{
-		printf("%i %i %i\n",datos[i][0],datos[i][1],disyuncion(datos[i][0],datos[i][1]));
-	}
-	printf("condicional\n");
-	for (int i = 0; i < 4; i++)
-	{
-		printf("%i %i %i\n",datos[i][0],datos[i][1],condicional(datos[i][0],datos[i][1]));
-	}
-	printf("bicondicional\n");
-	for (int i = 0; i < 4; i++)
-	{
-		printf("%i %i %i\n",datos[i][0],datos[i][1],bicondicional(datos[i][0],datos[i][1]));
-	}
+	char operador;
 
-	for (int i = 0; i < 1; i++)
+	printf("Ingrese la cantidad de datos\n");
+	scanf(" %i",&len);
+
+	printf("Ingrese los datos de p y q (0/FALSE) (1/TRUE)\n");
+	ponerCaracterEnXY(4, 4, 'p');
+	ponerCaracterEnXY(8, 4, 'q');
+	for (int i = 0; i < len; i++)
 	{
-		printf("Primer (0/FALSE) (1/TRUE)\n");
+		iraXY(4,i + 5);
 		scanf("%i",&datosusuario[i][0]);
-		printf("segundo dato (0/FALSE) (1/TRUE)\n");
+		iraXY(8,i + 5);
 		scanf("%i",&datosusuario[i][1]);
 		printf("\n");
 	}
 
-	printf("Listo...\n");
 
-	printf("bicondicional\t== codicional(a->b)\t^\tcondicional(b->a)\tresultados\n");
+	printf("Ingrese el operador\n");
+	scanf(" %c",&operador);
+	switch(operador){
+		case '!':
+			printf("Ingrese la variable (p/0) (q/1) \n");
+			scanf(" %i",&variable);
 
-	for (int i = 0; i < 1; ++i)
-	{
-		printf("%i   %i   %i\t\t%i   %i   %i\t\t%i   %i   %i\t\t %i\n",datosusuario[i][0],datosusuario[i][1],bicondicional(datosusuario[i][0],datosusuario[i][1]),
-												datosusuario[i][0],datosusuario[i][1],condicional(datosusuario[i][0],datosusuario[i][1]),
-												datosusuario[i][1],datosusuario[i][0],condicional(datosusuario[i][1],datosusuario[i][0]),
-												bicondicional(condicional(datosusuario[i][0],datosusuario[i][1]), condicional(datosusuario[i][1],datosusuario[i][0])));
+			iraXY(20, 4);
+			printf("Negacion:\n");
+			for (int i = 0; i < len; ++i)
+			{
+				iraXY(20,i + 5);
+				printf("%i",negacionU(datosusuario[i][variable]));
+			}
+		break;
+		case '&':
+			iraXY(20, 4);
+			printf("and:\n");
+
+			for (int i = 0; i < len; ++i)
+			{
+				iraXY(20,i + 5);
+				printf("%i",conjuncion(datosusuario[i][1], datosusuario[i][0]));
+			}	
+		break;
+		case '|':
+			iraXY(20, 4);
+			printf("or: \n");
+
+			for (int i = 0; i < len; i++)
+			{
+				iraXY(20,i + 5);	
+				printf("%i",disyuncion(datosusuario[i][0], datosusuario[i][1]));
+			}	
+		break;
+		case '>':
+			
+			iraXY(20, 4);
+			printf("condicional p -> q: \n");
+
+			for (int i = 0; i < len; i++)
+			{
+				iraXY(20,i + 5);	
+				printf("%i",condicional(datosusuario[i][0], datosusuario[i][1]));
+			}	
+		break;
+		case '<':
+			
+			iraXY(20, 4);
+			printf("condicional q -> p: \n");
+
+			for (int i = 0; i < len; i++)
+			{
+				iraXY(20,i + 5);	
+				printf("%i",condicional(datosusuario[i][1], datosusuario[i][0]));
+			}	
+		break;
+		case '-':
+			
+			iraXY(20, 4);
+			printf("bicondicional: \n");
+
+			for (int i = 0; i < len; i++)
+			{
+				iraXY(20,i + 5);	
+				printf("%i",bicondicional(datosusuario[i][0], datosusuario[i][1]));
+			}	
+		break;
 	}
+
+	PAUSE;
 
 	return 0;
 }
