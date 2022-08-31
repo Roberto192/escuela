@@ -1,0 +1,52 @@
+inicio
+	hacer
+		mostrarMenu("jugar/usuario/salir");
+		ponerOpcion(opcion)
+
+		si (opcion != 3)
+			logica(opcion)
+
+		limpiarPantalla
+	repetir(opcion != 3)
+
+fin
+
+mostrarMenu(texto)
+	dibujarCuadradoCentrado(texto, altura, anchura)
+	ponMenu(texto, 5)
+
+ponerOpcion(opcion)
+	iraXY(x,y)
+	regresar recibirOpcion()
+
+logica(opcion)
+	si (opcion == 1)
+		cargarJuego()
+		regresar 0;
+
+
+	si (opcion == 2)
+		mostrarUsarios()
+		ponerOpcion(op)
+		si (op == 'n')
+			crearUsuarioNuevo()
+		regresar 0;
+
+	ponerMensajeError("digite una opcion valida");
+
+mostrarUsarios()
+	si (cargarUsarios)
+		ponerCuadradoCentrado(tipo, altura, anchura)
+		ponMenu(usuarios, altura)
+
+	si no
+		ponerMensajeError("Usuarios no creados")
+
+cargarJuego()
+	si 	(cargarUsuario())
+		usuario = elijirUsuario()
+		juego(usuario)
+	si no
+		ponerMensajeError("Usuarios no creados")
+
+

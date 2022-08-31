@@ -1,5 +1,4 @@
 #include "ventanas.h"
-#include <stdio.h>
 
 void menu();
 void seleccionaUnaOpcion(int opcion);
@@ -13,7 +12,9 @@ int game(int tipo);
 int main(int argc, char const *argv[])
 {
 	int opcion;
-	rellenarColorDeLaConsola(MESAGE_COLOR);
+	//rellenarColorDeLaConsola(MESAGE_COLOR);
+
+	ponerCuadradoRelleno(0,0,119,39, ' ');
 
 	while(TRUE){
 		ventanasPrincipales();
@@ -29,10 +30,10 @@ int main(int argc, char const *argv[])
 
 void ventanasPrincipales(){
 
-	ponerCuadradoEnXY(0, 0, 119, 29, 0);
-	ponerCuadradoConTextoCentradoEnXY(" CATEGORIAS ", 40, 7, 80, 20, 0);
-	ponerColor(ERROR_COLOR);
-	ponerCuadradoConTextoCentradoEnXY(" MENSAJES ", 1, 24, 118, 28, 0);
+	ponerCuadradoEnXY(0, 0, 119, 29, 2);
+	ponerCuadradoConTextoCentradoEnXY(" CATEGORIAS ", 40, 7, 80, 20, 2);
+	//ponerColor(ERROR_COLOR);
+	ponerCuadradoConTextoCentradoEnXY(" MENSAJES ", 1, 24, 118, 28, 2);
 	
 }
 
@@ -51,7 +52,7 @@ void menu(){
 
 	};
 
-	ponerColor(MESAGE_COLOR);
+	//ponerColor(MESAGE_COLOR);
 	ponerMenuEnXY(menu, 8, 10);
 
 }
@@ -65,28 +66,28 @@ void seleccionaUnaOpcion(int opcion){
 		if(opcion == 49){
 			ponerTextoCentradoY(26, "Seleccionaste opcion 1");
 			ponerCuadradoRelleno(2, 26, 118, 27, ' ');
-			Sleep(800);
+			//Sleep(800);
 			game(1);
 		}
 
 		if(opcion == 50){
 			ponerTextoCentradoY(26, "Seleccionaste opcion 2");
 			ponerCuadradoRelleno(2, 26, 118, 27, ' ');
-			Sleep(800);
+			//Sleep(800);
 			game(2);
 		}
 
 		if (opcion == 51){
 			ponerTextoCentradoY(26, "Seleccionaste opcion 3");
 			ponerCuadradoRelleno(2, 26, 118, 27, ' ');
-			Sleep(800);
+			//Sleep(800);
 			game(3);
 		}
 
 		if (opcion == 52){
 
 			ponerTextoCentradoY(26, "Hasta la proxima");
-			Sleep(1200);
+			//Sleep(1200);
 			exit(0);
 		}
 	}else{
@@ -234,7 +235,7 @@ int game(int tipo){
 			limpiarVentanaPrincipal();
 			ponerCuadradoEnXY(51, 14, 68, 16, 0);
 			ponerTextoCentradoY(15, "Ganaste prro :v");
-			Sleep(1000);
+			//Sleep(1000);
 			ponerCuadradoRelleno(2, 26, 118, 27, ' ');
 			ponerCuadradoRelleno(51, 14, 68, 16, ' ');
 			free(buff);
@@ -259,12 +260,12 @@ int game(int tipo){
 			return 0;
 		}
 	}
-	Sleep(1000);
+	//Sleep(1000);
 	limpiarVentanaPrincipal();
 	ponerCuadradoEnXY(51, 14, 68, 16, 0);
 	ponerTextoCentradoY(15, "Perdiste por nuv");
 	ponerTextoCentradoY(26, palabra);
-	Sleep(1000);
+	//Sleep(1000);
 	ponerCuadradoRelleno(2, 26, 118, 27, ' ');
 	ponerCuadradoRelleno(51, 14, 68, 16, ' ');
 	free(buff);
@@ -376,7 +377,7 @@ void frutasFuncion(){
 		if(strcmp(palabra, buff) == 0){
 			ponerTextoCentradoY(15, "Ganaste!!!");
 			time = 22;
-			Sleep(1000);
+			//Sleep(1000);
 			ponerCuadradoRelleno(2, 2, 100, 22, ' ');
 
 		}else{
@@ -391,7 +392,7 @@ void frutasFuncion(){
 			}
 		}
 
-		Sleep(300);
+		//Sleep(300);
 
 	}while(time != 20 && time <= 20);
 
@@ -449,14 +450,14 @@ void paisesFuncion(){
 		if(strcmp(palabra, buff) == 0){
 			ponerTextoCentradoY(15, "Ganaste!!!");
 			time = 21;
-			Sleep(1000);
+			//Sleep(1000);
 			ponerCuadradoRelleno(2, 2, 100, 22, ' ');
 
 		}else{
 			time++;
 		}
 
-		Sleep(300);
+		//Sleep(300);
 
 	}while(time != 20 && time <= 20);
 
@@ -513,14 +514,14 @@ void deportesFuncion(){
 		if(strcmp(palabra, buff) == 0){
 			ponerTextoCentradoY(15, "Ganaste!!!");
 			time = 21;
-			Sleep(1000);
+			//Sleep(1000);
 			ponerCuadradoRelleno(2, 2, 100, 22, ' ');
 
 		}else{
 			time++;
 		}
 
-		Sleep(300);
+		//Sleep(300);
 
 	}
 
