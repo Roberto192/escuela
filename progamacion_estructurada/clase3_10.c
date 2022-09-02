@@ -51,21 +51,25 @@ int main(int argc, char const *argv[])
 		horasNormales = horasTrabajadas;
 	}else{
 		horasNormales = 40;
-		horasExtras = horasExtrasDobles = horasTrabajadas - horasNormales;
+		horasExtrasDobles = horasTrabajadas - horasNormales;
 		if(horasExtrasDobles > 9){
+			horasExtrasTriples = horasExtrasDobles - 9;
 			horasExtrasDobles = 9;
-			horasExtras += horasExtrasTriples = horasExtrasDobles - horasExtrasDobles;
+			horasExtras = horasExtrasDobles + horasExtrasTriples;
+		}
+	}
+	
+	salarioNormal = horasNormales * salarioXhoras;
+
+	if(horasExtrasDobles > 0){
+		salarioExtra = horasExtrasDobles * salarioXhoras * 2;
+		salarioTotal += salarioExtra;
+		if(horasExtrasTriples > 0){
+			salarioExtra += horasExtrasTriples * salarioXhoras * 3;
 		}
 	}
 
-	salarioTotal = salarioNormal = horasNormales * salarioXhoras;
-
-	if(horasExtrasDobles){
-		salarioTotal += salarioExtra = horasExtrasDobles * (salarioXhoras * 2);
-		if(horasExtrasTriples){
-			salarioTotal += salarioExtra += horasExtrasTriples * (salarioXhoras * 3);
-		}
-	}
+	salarioTotal = salarioNormal + salarioExtra;
 
 	printf("Horas trabajadas: %i\nHoras Normales: %i\nHoras Extras: %i\nSalario Normal: %.2f\nSalario Extra %.2f\nSalario Total: %.2f\n",horasTrabajadas,horasNormales,horasExtras,salarioNormal,salarioExtra,salarioTotal);
 

@@ -53,7 +53,7 @@ int main(int argc, char const *argv[])
 		}else if(tipoDeLlamada == 3){
 			if(minutosLlamados > 2){
 				minutosLlamadosAdicionales = minutosLlamados - 2;
-				subtotal = (3 * 9) + (minutosLlamadosAdicionales * 4); 
+				subtotal = (2 * 9) + (minutosLlamadosAdicionales * 4); 
 			}else{
 				subtotal = minutosLlamados * 7;
 			}
