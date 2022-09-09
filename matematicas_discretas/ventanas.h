@@ -1,6 +1,5 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <unistd.h>
 #include <string.h>
 #include <time.h>
 
@@ -10,8 +9,6 @@
 #ifdef __unix__
 
 #define iraXY(x,y) printf("\033[%d;%dH", (y), (x))
-<<<<<<< HEAD
-=======
 
 void ponerColor(char *c){
 
@@ -21,7 +18,6 @@ void rellenarColorDeLaConsola(char *c){
 
 }
 
->>>>>>> origin/main
 #endif
 
 #ifdef _WIN32

@@ -5,10 +5,13 @@ TODO*.*
 *.pptx
 *.pdf
 *.txt
+*.exe
+*.o
 .clang-format
 .clang-tidy
 .editorconfig
 .gitattributes
+null
 
 ################################
 ########### FOLDERS ############
