@@ -1,6 +1,5 @@
 #include "print.h"
 
-
 int main(int argc, char const *argv[])
 {    
 
@@ -15,15 +14,6 @@ int main(int argc, char const *argv[])
     for (int i = 0; i <= 10; i++){
         print("%e es par: %b",i,(i%2 == 0));
     }
-
-	//char *var;
-
-	//snprintf(var, 8, "%f", 8.20);
-
-	//puts(var);
-
-    //printf("%s\n",replaceString(cambiar,5,7,"si"));
-    //printf("%s\n",replaceString(cambiar,5,7,"no"));
 
     putchar(10);
     system("read -p ''");
