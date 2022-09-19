@@ -9,9 +9,7 @@
 
 #ifdef __unix__
 
-#define iraXY(x,y) printf("\033[%d;%dH", (y), (x))
-<<<<<<< HEAD
-=======
+#define iraXY(x,y) printf("\033[%d;%dH", (y), (x));
 
 void ponerColor(char *c){
 
@@ -21,7 +19,6 @@ void rellenarColorDeLaConsola(char *c){
 
 }
 
->>>>>>> origin/main
 #endif
 
 #ifdef _WIN32
