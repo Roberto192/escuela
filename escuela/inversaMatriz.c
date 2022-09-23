@@ -2,6 +2,7 @@
 #include <stdlib.h>
 
 #define SIZE 4
+//(-1)^i+j *|aij|
 
 void imprimirMatriz(int [SIZE][SIZE]);
 void tranversa(int [SIZE][SIZE]);

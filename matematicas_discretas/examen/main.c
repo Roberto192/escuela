@@ -105,7 +105,7 @@ int main(int argc, char const *argv[])
 	//}
 
 	printf("\n");
-	//system("read -p ''");
+	system("read -p ''");
 	system("pause");
 	return 0;
 }

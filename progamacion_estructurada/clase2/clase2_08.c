@@ -9,7 +9,7 @@
 int main(int argc, char const *argv[])
 {
     
-    short unsigned edad, dias; 
+    int unsigned edad, dias; 
     int horas;
     int horasDormidas;
 
