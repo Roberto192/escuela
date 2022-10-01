@@ -40,16 +40,14 @@ int main(int argc, char const *argv[])
 		if(opcionEntera == 6){
 			salir = 1;
 		}else{
-			rellenarColorDeLaConsola(RESET_COLOR);
 			if(opcionEntera == 1){
 				aux = pedirDatos(TRUE, NULL);
 				alumnos[indice++] = aux;
-				rellenarColorDeLaConsola(RESET_COLOR);
+				fgets(opcion, MAX, stdin);
 			}else{
 				if(opcionEntera == 2){
 					mostrarAlumnos(alumnos, indice);
 					fgets(opcion, MAX, stdin);
-					rellenarColorDeLaConsola(RESET_COLOR);
 				}else{
 					if(opcionEntera == 3){
 						ponerTextoEnXY(10, 5, "Dame la matricula: ");
@@ -88,6 +86,8 @@ int main(int argc, char const *argv[])
 									printf("Carrera: %s",alumnos[opcionEntera].carrera);
 									iraXY(10, 10);
 									printf("Edad: %d",alumnos[opcionEntera].edad);
+								}else{
+									ponerTextoCentradoY(15, "Matricula no encontrada");
 								}
 
 								fgets(opcion, MAX, stdin);
@@ -145,18 +145,21 @@ int validarMatricula(char *matricula){
 void pedirDato(char *dato, int size, char *msg, char *msgError, int isMat){
 	int salir = FALSE;
 
+
+	ponerCuadradoRelleno(MAXWIDHT/2 - 16, 1, MAXWIDHT/2 + 16, 13, ' ');
+	
 	do
 	{
-		ponerTextoEnXY(10, 5, msg);
+		ponerCuadradoRelleno(MAXWIDHT/2 - 16, 5, MAXWIDHT/2 + 16, 6, ' ');
+		ponerTextoEnXY(MAXWIDHT/2-16, 5, msg);
 		fgets(dato, size, stdin);
-		ponerCuadradoRelleno(10, 4, 50, 5, ' ');
 		if(isMat){
 			if(validarMatricula(dato) == TRUE){
 				salir = TRUE;
 			}else{
 				salir = FALSE;
 				ponerColor(ERROR_COLOR);
-				ponerTextoEnXY(10, 4, msgError);
+				ponerTextoEnXY(MAXWIDHT/2-16, 4, msgError);
 				ponerColor(RESET_COLOR);
 			}
 		}else{
@@ -165,7 +168,7 @@ void pedirDato(char *dato, int size, char *msg, char *msgError, int isMat){
 			}else{
 				salir = FALSE;
 				ponerColor(ERROR_COLOR);
-				ponerTextoEnXY(10, 4, msgError);
+				ponerTextoEnXY(MAXWIDHT/2-16, 4, msgError);
 				ponerColor(RESET_COLOR);
 			}
 		}
@@ -180,9 +183,6 @@ alumno pedirDatos(int pM, char *__matricula){
 	char apellidoMaterno[MAX_APELLIDO];
 	char carrera[MAX_CARRERA];
 	char edad[MAX_EDAD];
-
-
-	rellenarColorDeLaConsola(RESET_COLOR);
 
 	if(pM == TRUE){
 		pedirDato(matricula, MAX_MATRICULA, "Ingrese la matricula: ", "Ingrese un valor valido de matricula", TRUE);
@@ -203,6 +203,13 @@ alumno pedirDatos(int pM, char *__matricula){
 	pedirDato(carrera, MAX_CARRERA, "Ingrese la carrera: ", "Ingrese una carrera validar", FALSE);
 	pedirDato(edad, MAX_EDAD, "Ingrese la edad: ", "Ingrese una edad valida", FALSE);
 
+	ponerTextoCentradoY(15, matricula);
+	ponerTextoCentradoY(16, nombre);
+	ponerTextoCentradoY(17, apellidoPaterno);
+	ponerTextoCentradoY(18, apellidoMaterno);
+	ponerTextoCentradoY(19, carrera);
+	ponerTextoCentradoY(20, edad);
+
 	return crearAlumno(matricula, nombre, apellidoPaterno, apellidoMaterno, carrera, atoi(edad));
 }
 
@@ -213,11 +220,11 @@ void mostrarAlumnos(alumno *alumnos, int max){
 
 	if(max != 0){
 		for (i = 0; i < max; i++){
-			ponerTextoEnXY(1, 5 + i, alumnos[i].matricula);
-			ponerTextoEnXY(13, 5 + i, alumnos[i].nombre);
-			ponerTextoEnXY(34, 5 + i, alumnos[i].carrera);
-			iraXY(45, 5 + i);
-			printf("%d",alumnos[i].edad);
+			//ponerTextoEnXY(1, 5 + i, alumnos[i].matricula);
+			//ponerTextoEnXY(13, 5 + i, alumnos[i].nombre);
+			//ponerTextoEnXY(34, 5 + i, alumnos[i].carrera);
+			//iraXY(45, 5 + i);
+			//printf("%d",alumnos[i].edad);
 		}
 	}else{
 		ponerTextoEnXY(1, 5, "No hay alumnos creados");
@@ -275,8 +282,8 @@ int actualizarXmatricula(alumno *alumnos, char *matricula, int max){
 
 void menu(){
 	rellenarColorDeLaConsola(RESET_COLOR);
-	ponerColor(MAIN_COLOR);
-	ponerCuadradoEnXY(16, 4, 36, 13, 3);
+	ponerColor(ERROR_COLOR);
+	ponerCuadradoConTextoCentradoEnXY("Menu UwU", MAXWIDHT/2 - 16, 4, MAXWIDHT/2 + 16, 13, 3);
 	ponerColor(MESAGE_COLOR);
 	ponerTextoCentradoY(5, "[1] Crear          ");
 	ponerTextoCentradoY(6, "[2] Mostrar        ");
@@ -284,7 +291,7 @@ void menu(){
 	ponerTextoCentradoY(8, "[4] Eliminar       ");
 	ponerTextoCentradoY(9, "[5] Buscar         ");
 	ponerTextoCentradoY(10, "[6] Guardar y Salir");
-	iraXY(18, 12);
+	iraXY(MAXWIDHT/2 - 15, 12);
 	ponerColor(MAIN_COLOR);
 	printf("->");
 	ponerColor(RESET_COLOR);

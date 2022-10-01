@@ -27,7 +27,7 @@ int longitud(char *cadena){
 
 void quitarCaracter(char *cadena, int x){
 	int i;
-	char *aux = malloc(longitud(cadena));
+	char *aux = (char *) malloc(longitud(cadena));
 	char *mem = &(*aux);
 
 	for (i = 0; cadena[i] != '\0'; i++){
@@ -45,9 +45,7 @@ void quitarCaracter(char *cadena, int x){
 void imprimirCadena(char *cadena){
 	int i = 31;
 	while(*cadena != '\0'){
-		printf("\33[%dm",(++i > 36)? i = 31 : i);
 		putc(*(cadena++), stdout);
-		printf("\33[0m");
 	}
 }
 
@@ -68,10 +66,9 @@ char *voltearCadena(char *cadena){
 void imprimirCadenaHorizontal(char *cadena){
 	int i = 31;
 	while(*cadena != '\0'){
-		printf("\33[%dm",(++i > 37)? i = 31 : i);
+		(++i > 37)? i = 31 : i;
 		putc(*(cadena++), stdout);
 		stdlin;
-		printf("\33[0m");
 	}
 }
 
@@ -140,7 +137,6 @@ void vocales(char *cadena, int si){
 	int j = 30;
 	if(si){
 		for (i = 0; cadena[i] != '\0'; i++){
-			printf("\33[%dm",(++j > 37)? j = 31 : j);
 			if(cadena[i] == 'A'){
 				putc(cadena[i], stdout);
 			}else{
@@ -182,11 +178,9 @@ void vocales(char *cadena, int si){
 					}
 				}
 			}
-			printf("\33[0m");
 		}
 	}else{
 		for (i = 0; cadena[i] != '\0'; i++){
-			printf("\33[%dm",(++j > 37)? j = 31 : j);
 			if(cadena[i] != 'A'){
 				if(cadena[i] != 'a'){
 					if(cadena[i] != 'I'){
@@ -208,7 +202,6 @@ void vocales(char *cadena, int si){
 					}
 				}
 			}
-			printf("\33[0m");
 		}
 	}
 

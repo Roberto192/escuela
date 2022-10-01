@@ -6,6 +6,11 @@ int main(int argc, char const *argv[]){
 	char *textoVolteado = voltearCadena(texto);
 
 	puts("Primera Salida");
+
+
+
+
+
 	imprimirCadena(texto);
 	stdlin;
 	puts("Segunda Salida");
@@ -28,8 +33,10 @@ int main(int argc, char const *argv[]){
 	stdlin;
 	puts("Octava Salida");
 	recortarPorIzquierdaCadena(textoVolteado);
+	stdlin;
 	puts("Novena salida");
 	vocales(texto, 0);
+	stdlin;
 	puts("Decima salida");
 	vocales(texto, 1);
 

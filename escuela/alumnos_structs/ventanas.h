@@ -7,10 +7,10 @@
 #define TRUE 1
 #define FALSE 0
 
-#define MAXWIDHT 53
 
 #ifdef __unix__
 
+#define MAXWIDHT 53
 void ponerColor(char *);
 void rellenarColorDeLaConsola(char *);
 void ponerCuadradoRelleno(short, short, short, short, char);
@@ -21,7 +21,7 @@ void ponerTextoEnXY(short, short,const char *);
 #define ERROR_COLOR "\33[31m"
 #define MESAGE_COLOR "\33[36m"
 #define RESET_COLOR "\33[0m"
-#define PAUSE system("pause>>null")
+#define PAUSE system("read -p ''")
 
 
 void ponerColor(char *c){
@@ -38,10 +38,16 @@ void rellenarColorDeLaConsola(char *c){
 #ifdef _WIN32
 #include <windows.h>
 
+#define MAXWIDHT 120
+#define MAXY 40
+
 #define MAIN_COLOR BACKGROUND_RED | BACKGROUND_BLUE | FOREGROUND_INTENSITY | FOREGROUND_BLUE | FOREGROUND_RED | FOREGROUND_GREEN
 #define ERROR_COLOR BACKGROUND_RED | BACKGROUND_BLUE | FOREGROUND_INTENSITY | FOREGROUND_RED
 #define MESAGE_COLOR BACKGROUND_RED | BACKGROUND_BLUE | FOREGROUND_INTENSITY | FOREGROUND_GREEN
+#define RESET_COLOR MAIN_COLOR
 #define PAUSE system("pause>>null")
+
+void ponerCuadradoRelleno(short,short,short,short, char);
 
 //con esta funcion el programador podra ir en X y Y posicion en la consola
 void iraXY(short x, short y){
@@ -61,6 +67,12 @@ void ponerColor(WORD color){
 }
 
 void rellenarColorDeLaConsola(WORD color){
+	ponerColor(color);
+	ponerCuadradoRelleno(MAXWIDHT - MAXWIDHT, MAXY - MAXY, MAXWIDHT, MAXY, ' ');
+	ponerColor(RESET_COLOR);
+}
+
+void __rellenarColorDeLaConsola(WORD color){
 	HANDLE terminal = GetStdHandle(STD_OUTPUT_HANDLE);
 	CONSOLE_SCREEN_BUFFER_INFO screenInfo;
 	COORD coordStart = { 0, 0 };
