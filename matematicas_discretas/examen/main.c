@@ -96,16 +96,7 @@ int main(int argc, char const *argv[])
 	}else{
 		printf("%s",convert((proposicion[0] == 'p')? _p: _q ));
 	}
-	//for (int i = 0; i < tam; i++){
-	//	printf("%c ",tok[i].type);
-	//	printf("%i ",tok[i].pos);
-	//	printf("%i ",tok[i].L);
-	//	printf("%i ",tok[i].R);
-	//	printf("\n");
-	//}
-
+	
 	printf("\n");
-	system("read -p ''");
-	system("pause");
 	return 0;
 }

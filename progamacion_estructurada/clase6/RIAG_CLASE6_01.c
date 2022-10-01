@@ -3,15 +3,15 @@
 #include <string.h>
 
 #define MAX 10
-#define convertIC(x) -x
+#define convertIC(x) #x
 
 void menu();
-void fibonnaciFor();
 void fibonnaciWhile();
 void fibonnaciDoWhile();
-void factorialFor();
+void fibonnaciFor();
 void factorialWhile();
 void factorialDoWhile();
+void factorialFor();
 void cantidadDigitos();
 void cicloFor();
 void cicloWhile();
@@ -20,10 +20,13 @@ void cicloDoWhile();
 int main(int argc, char const *argv[])
 {
 
-	cicloDoWhile();
+	printf("Programa con ciclo while\n");
 	cicloWhile();
+	printf("Programa con ciclo Do while\n");
+	cicloDoWhile();
+	printf("Progama con ciclo for\n");
 	cicloFor();
-
+	
 	puts("Saliendo...");
 
 	return 0;
@@ -33,25 +36,27 @@ int main(int argc, char const *argv[])
 
 void cicloWhile(){
 
-	char opcion = ' ';
+	char opcion[MAX];
+	int op;
 
-	while(opcion != 27){
+	while(opcion[0] != 27){
 		menu();
 		printf("->");
-		scanf(" %c",&opcion);
+		scanf(" %[^\n]",opcion);
 		system("clear");
 
-		if( (opcion - 48) == 1){
+		op = atoi(opcion);
+		if( op == 1){
 			fibonnaciWhile();
 		}else{
-			if ( (opcion - 48 ) == 2){
+			if ( op == 2){
 				factorialWhile();
 			}else{
-				if( (opcion - 48) == 3){
+				if( op == 3){
 					cantidadDigitos();
 				}else{
-					if(opcion != 27){
-						printf("Ingrese un valor correcto: %c\n",opcion);
+					if(opcion[0] != 27){
+						printf("Ingrese un valor correcto: %s\n",opcion);
 					}
 				}
 			}
@@ -140,7 +145,7 @@ void fibonnaciFor(){
 
 	printf("Ingrese la cantidad de veces a repetir\n");
 	printf("->");
-	scanf(" %s",veces);
+	scanf(" %[^\n]",veces);
 	n = atoi(veces);
 
 	for(i = 0; i < n; i++){
@@ -164,7 +169,7 @@ void fibonnaciWhile(){
 
 	printf("Ingrese la cantidad de veces a repetir\n");
 	printf("->");
-	scanf(" %s",veces);
+	scanf(" %[^\n]",veces);
 	n = atoi(veces);
 
 	i = 0;
@@ -190,7 +195,7 @@ void fibonnaciDoWhile(){
 
 	printf("Ingrese la cantidad de veces a repetir\n");
 	printf("->");
-	scanf(" %s",veces);
+	scanf(" %[^\n]",veces);
 	n = atoi(veces);
 
 	i = 0;
@@ -215,7 +220,7 @@ void factorialFor(){
 	printf("Ingrese el numero del factorial\n");
 	printf("->");
 
-	scanf(" %s",cadenaDeNumero);
+	scanf(" %[^\n]",cadenaDeNumero);
 
 	numeroFactorial = atoi(cadenaDeNumero);
 
@@ -245,7 +250,7 @@ void factorialWhile(){
 	printf("Ingrese el numero del factorial\n");
 	printf("->");
 
-	scanf(" %s",cadenaDeNumero);
+	scanf(" %[^\n]",cadenaDeNumero);
 
 	numeroFactorial = atoi(cadenaDeNumero);
 
@@ -276,7 +281,7 @@ void factorialDoWhile(){
 	printf("Ingrese el numero del factorial\n");
 	printf("->");
 
-	scanf(" %s",cadenaDeNumero);
+	scanf(" %[^\n]",cadenaDeNumero);
 
 	numeroFactorial = atoi(cadenaDeNumero);
 
@@ -304,7 +309,7 @@ void cantidadDigitos(){
 
 	printf("Ingrese un numero diferente a 0\n");
 	printf("->");
-	scanf(" %s",cadenaDeNumero);
+	scanf(" %[^\n]",cadenaDeNumero);
 
 	numero = atoi(cadenaDeNumero);
 
