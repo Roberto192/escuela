@@ -135,7 +135,7 @@ void alumnos(){
 		if(tieneDerecho(cal) == FALSE){
 			sinDerecho++;
 		}
-		system("clear");
+		CLEAR;
 	}
 
 	printf("Alumnos sin derecho a examen de nivelacion %d\n",sinDerecho);
@@ -235,49 +235,45 @@ void embarcacion(){
 	int kilosTotales = 0;
 	int i;
 	int bandera = 0;
-	int bandera2 = 0;
-	
-	do{
-		printf("Cuantos pasajeros son:");
-		printf("\n->");
-		fgets(cantidadDePasajeros, 10, stdin);
-		if(strcmp(cantidadDePasajeros, "\n") != 0){
-			pasajeros = atoi(cantidadDePasajeros);
-		
-			if(pasajeros > 0){
+	int bandera2 = 1;
+
+	for (i = 1; bandera2 == 1; i++){
+		bandera = 0;
+
+		do{
+			printf("Ingrese el peso en kilos del pasajero %d:\n",i);
+			printf("->");
+			fgets(kilosTotalDePasajeros, 10, stdin);
+			if(strcmp(kilosTotalDePasajeros, "\n") != 0){
 				bandera = 1;
 			}
-		}
-	
-		CLEAR;
-	}while(bandera != 1);
 
-	if(pasajeros > 0){
-		if(pasajeros > 10){
-			printf("Se cumplio cantidad maxima de pasajeros\n");
-		}else{
-			for (i = 0; i < pasajeros; i++){
+			if(!atoi(kilosTotalDePasajeros)){
 				bandera = 0;
-				do{
-					printf("Ingrese el peso en kilos del pasajero %d:\n",i);
-					printf("->");
-					fgets(kilosTotalDePasajeros, 10, stdin);
-					if(strcmp(kilosTotalDePasajeros, "\n") != 0){
-						bandera = 1;
-					}
-					CLEAR;
-				} while (bandera != 1);
-				kilosTotales += atoi(kilosTotalDePasajeros);
 			}
-			
-			if(kilosTotales > 805){
-				printf("Se cumplio peso maximo\n");
+			CLEAR;
+		} while (bandera != 1);
+		kilosTotales += atoi(kilosTotalDePasajeros);
+		if(!(i < 10)){
+			bandera2 = 0;
+		}else{
+			if (kilosTotales > 805)
+			{
+				bandera2 = 2;
 			}
-
-			printf("promedio peso: %dkg",kilosTotales/pasajeros);
+		}
+	}
+	
+	if(bandera2 == 2){
+		printf("Se cumplio peso maximo\n");
+	}else{
+		if(bandera2 == 0){
+			printf("Se cumplio cantidad maxima\n");
 		}
 	}
 
+	printf("promedio peso: %dkg\n",kilosTotales/--i);
+	
 }
 
 void repetirMateria(){

@@ -2,6 +2,14 @@
 #include <stdlib.h>
 #include <string.h>
 
+
+#ifdef __unix__
+	#define CLEAR system("clear");
+#endif
+
+#ifdef __WIN32
+	#define CLEAR system("cls");
+#endif
 #define MAX 10
 #define convertIC(x) #x
 
@@ -20,13 +28,51 @@ void cicloDoWhile();
 int main(int argc, char const *argv[])
 {
 
-	printf("Programa con ciclo while\n");
-	cicloWhile();
-	printf("Programa con ciclo Do while\n");
-	cicloDoWhile();
-	printf("Progama con ciclo for\n");
-	cicloFor();
-	
+	char opcion[10];
+	int bandera = 1;
+	int si = 1;
+	int op;
+
+	while(bandera){
+
+		do
+		{
+			printf("1._ Programa con ciclo while\n");
+			printf("2._ Programa con ciclo Do while\n");
+			printf("3._ Progama con ciclo for\n");
+			printf("4._ Salir\n");
+
+			fgets(opcion, 10, stdin);
+
+			if(strcmp(opcion, "\n") != 0){
+				si = 0;
+			}
+			op = atoi(opcion);
+			if(!op){
+				si = 1;
+			}
+			CLEAR;
+		} while (si);
+
+		if(op == 1){
+			cicloWhile();
+		}else{
+			if(op == 2){
+				cicloDoWhile();
+			}else{
+				if (op == 3){
+					cicloFor();
+				}else{
+					if(op == 4){
+						bandera = 0;
+					}
+				}
+			}
+		}
+
+
+	}
+
 	puts("Saliendo...");
 
 	return 0;
@@ -43,7 +89,7 @@ void cicloWhile(){
 		menu();
 		printf("->");
 		scanf(" %[^\n]",opcion);
-		system("clear");
+		CLEAR;
 
 		op = atoi(opcion);
 		if( op == 1){
@@ -73,7 +119,7 @@ void cicloDoWhile(){
 		menu();
 		printf("->");
 		scanf(" %c",&opcion);
-		system("clear");
+		CLEAR;
 
 		if( (opcion - 48) == 1){
 			fibonnaciDoWhile();
@@ -102,7 +148,7 @@ void cicloFor(){
 		menu();
 		printf("->");
 		scanf(" %c",&opcion);
-		system("clear");
+		CLEAR;
 
 		if( (opcion - 48) == 1){
 			fibonnaciFor();
@@ -125,11 +171,11 @@ void cicloFor(){
 
 void menu(){
 
-	puts("\t\t    MEUWU");
-	puts("\t\t    [1] Fibonacci");
-	puts("\t\t    [2] Factorial");
-	puts("\t\t    [3] Cantidad de digitos");
-	puts("\t\t    [x] ESC + Enter para salir");
+	puts("MEUWU");
+	puts("[1] Fibonacci");
+	puts("[2] Factorial");
+	puts("[3] Cantidad de digitos");
+	puts("[x] ESC + Enter para salir");
 
 }
 

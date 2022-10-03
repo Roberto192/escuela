@@ -5,7 +5,7 @@
 #include "estructuras.h"
 #include "ventanas.h"
 
-#define MAX_ALUMNOS 10
+#define MAX_ALUMNOS 100
 #define MAX 3
 
 int validarMatricula(char *);
@@ -36,23 +36,29 @@ int main(int argc, char const *argv[])
 		fgets(opcion, MAX, stdin);
 
 		opcionEntera = atoi(opcion);
-
+		rellenarColorDeLaConsola(RESET_COLOR);
 		if(opcionEntera == 6){
 			salir = 1;
 		}else{
 			if(opcionEntera == 1){
 				aux = pedirDatos(TRUE, NULL);
 				alumnos[indice++] = aux;
+
+				ponerTextoEnXY(MAXWIDHT/2 - 16, 16, "Enter para continuar");
 				fgets(opcion, MAX, stdin);
 			}else{
 				if(opcionEntera == 2){
 					mostrarAlumnos(alumnos, indice);
+
+					ponerTextoEnXY(MAXWIDHT/2 - 16, 16, "Enter para continuar");
 					fgets(opcion, MAX, stdin);
 				}else{
 					if(opcionEntera == 3){
-						ponerTextoEnXY(10, 5, "Dame la matricula: ");
+						ponerTextoEnXY(MAXWIDHT/2-16, 5, "Dame la matricula: ");
 						fgets(matriculaOpc, MAX_MATRICULA, stdin);
 						actualizarXmatricula(alumnos, matriculaOpc, indice);
+
+						ponerTextoEnXY(MAXWIDHT/2 - 16, 16, "Enter para continuar");
 						fgets(opcion, MAX, stdin);
 					}else{
 						if(opcionEntera == 4){
@@ -60,13 +66,15 @@ int main(int argc, char const *argv[])
 							pedirDato(matriculaOpc, MAX_MATRICULA, "Dame la matricula: ", "Ingrese una matricula correcta", TRUE);
 							if(eliminarXmatricula(alumnos, matriculaOpc, indice) == FALSE){
 								ponerColor(ERROR_COLOR);
-								ponerTextoEnXY(10, 15, "Matricula no encontrada");
+								ponerTextoEnXY(MAXWIDHT/2-16, 15, "Matricula no encontrada");
 							}else{
 								indice--;
 								ponerColor(MAIN_COLOR);
-								ponerTextoEnXY(10, 15, "Alumno eliminado satisfactoria mente");
+								ponerTextoEnXY(MAXWIDHT/2-16, 15, "Alumno eliminado satisfactoria mente");
 							}
 							ponerColor(RESET_COLOR);
+
+							ponerTextoEnXY(MAXWIDHT/2 - 16, 16, "Enter para continuar");
 							fgets(opcion, MAX, stdin);
 						}else{
 							if(opcionEntera == 5){
@@ -74,23 +82,25 @@ int main(int argc, char const *argv[])
 								pedirDato(matriculaOpc, MAX_MATRICULA, "Dame la matricula: ", "Matricula no valida", TRUE);
 								opcionEntera = buscarXmatricula(alumnos, matriculaOpc, indice);
 								if(opcionEntera != -1){
-									iraXY(10, 5);
+									rellenarColorDeLaConsola(RESET_COLOR);
+									iraXY(MAXWIDHT/2-16, 5);
 									printf("Matricula: %s",alumnos[opcionEntera].matricula);
-									iraXY(10, 6);
+									iraXY(MAXWIDHT/2-16, 6);
 									printf("Nombre: %s",alumnos[opcionEntera].nombre);
-									iraXY(10, 7);
+									iraXY(MAXWIDHT/2-16, 7);
 									printf("Apellido paterno: %s",alumnos[opcionEntera].apellidoPaterno);
-									iraXY(10, 8);
+									iraXY(MAXWIDHT/2-16, 8);
 									printf("Apellido materno: %s",alumnos[opcionEntera].apellidoMaterno);
-									iraXY(10, 9);
+									iraXY(MAXWIDHT/2-16, 9);
 									printf("Carrera: %s",alumnos[opcionEntera].carrera);
-									iraXY(10, 10);
+									iraXY(MAXWIDHT/2-16, 10);
 									printf("Edad: %d",alumnos[opcionEntera].edad);
 								}else{
-									ponerTextoCentradoY(15, "Matricula no encontrada");
-								}
 
-								fgets(opcion, MAX, stdin);
+									ponerTextoEnXY(MAXWIDHT/2 - 16, 15, "Matricula no encontrada");
+								}
+									ponerTextoEnXY(MAXWIDHT/2 - 16, 16, "Enter para continuar");
+									fgets(opcion, MAX, stdin);
 							}
 						}
 					}
@@ -146,11 +156,11 @@ void pedirDato(char *dato, int size, char *msg, char *msgError, int isMat){
 	int salir = FALSE;
 
 
-	ponerCuadradoRelleno(MAXWIDHT/2 - 16, 1, MAXWIDHT/2 + 16, 13, ' ');
+	ponerCuadradoRelleno(MAXWIDHT - MAXWIDHT, 1, MAXWIDHT, 13, ' ');
 	
 	do
 	{
-		ponerCuadradoRelleno(MAXWIDHT/2 - 16, 5, MAXWIDHT/2 + 16, 6, ' ');
+		ponerCuadradoRelleno(MAXWIDHT/2- 16, 5, MAXWIDHT/2 + 16, 6, ' ');
 		ponerTextoEnXY(MAXWIDHT/2-16, 5, msg);
 		fgets(dato, size, stdin);
 		if(isMat){
@@ -216,15 +226,15 @@ alumno pedirDatos(int pM, char *__matricula){
 void mostrarAlumnos(alumno *alumnos, int max){
 	int i;
 
+	rellenarColorDeLaConsola(RESET_COLOR);
 	ponerTextoEnXY(1, 3, "Matricula   Nombre\t\t Carrera  Edad");
-
 	if(max != 0){
 		for (i = 0; i < max; i++){
-			//ponerTextoEnXY(1, 5 + i, alumnos[i].matricula);
-			//ponerTextoEnXY(13, 5 + i, alumnos[i].nombre);
-			//ponerTextoEnXY(34, 5 + i, alumnos[i].carrera);
-			//iraXY(45, 5 + i);
-			//printf("%d",alumnos[i].edad);
+			ponerTextoEnXY(1, 5 + i, alumnos[i].matricula);
+			ponerTextoEnXY(13, 5 + i, alumnos[i].nombre);
+			ponerTextoEnXY(34, 5 + i, alumnos[i].carrera);
+			iraXY(45, 5 + i);
+			printf("%d",alumnos[i].edad);
 		}
 	}else{
 		ponerTextoEnXY(1, 5, "No hay alumnos creados");
@@ -261,6 +271,9 @@ int eliminarXmatricula(alumno *alumnos, char *matricula, int max){
 
 int actualizarXmatricula(alumno *alumnos, char *matricula, int max){
 	int indice = buscarXmatricula(alumnos, matricula, max);
+	int salir = 1;
+	char opcion[10];
+	int op;
 
 	if(indice != -1){
 		char *nombre = alumnos[indice].nombre;
@@ -269,11 +282,75 @@ int actualizarXmatricula(alumno *alumnos, char *matricula, int max){
 		char *carrera = alumnos[indice].carrera;
 		int edad = alumnos[indice].edad;
 
-		alumnos[indice] = pedirDatos(FALSE, matricula);
+		while(salir){
+			rellenarColorDeLaConsola(RESET_COLOR);
+			ponerCuadradoConTextoCentradoEnXY("Modificaci-OwO-n", MAXWIDHT/2 - 16, 4, MAXWIDHT/2 + 16, 13, 3);
+			ponerColor(MESAGE_COLOR);
+			ponerTextoCentradoY(5, "[1] Matricula        ");
+			ponerTextoCentradoY(6, "[2] Nombre           ");
+			ponerTextoCentradoY(7, "[3] Apellido paterno ");
+			ponerTextoCentradoY(8, "[4] Apellido materno ");
+			ponerTextoCentradoY(9, "[5] Carrera          ");
+			ponerTextoCentradoY(10, "[6] Edad             ");
+			ponerTextoCentradoY(11, "[7] Salir            ");
+
+			iraXY(MAXWIDHT/2-16, 15);
+			printf("Matricula: %s",matricula);
+			iraXY(MAXWIDHT/2-16, 16);
+			printf("Nombre: %s",nombre);
+			iraXY(MAXWIDHT/2-16, 17);
+			printf("Apellido paterno: %s",apellidoP);
+			iraXY(MAXWIDHT/2-16, 18);
+			printf("Apellido materno: %s",apellidoM);
+			iraXY(MAXWIDHT/2-16, 19);
+			printf("Carrera: %s",carrera);
+			iraXY(MAXWIDHT/2-16, 20);
+			printf("Edad: %d",edad);
+
+
+			iraXY(MAXWIDHT/2 - 15, 12);
+			ponerColor(MAIN_COLOR);
+			printf("->");
+			ponerColor(RESET_COLOR);
+
+
+			fgets(opcion, 10, stdin);
+			op = atoi(opcion);
+
+			if(op == 7){
+				salir = 0;
+			}else{
+				if(op == 1){
+					pedirDato(matricula, MAX_MATRICULA, "Ingrese la matricula: ", "Ingrese una matricula valida", TRUE);	
+				}else{
+					if(op == 2){
+						pedirDato(nombre, MAX_NOMBRE, "Ingrese el nombre: ", "Ingrese un nombre valido", FALSE);
+					}else{
+						if(op == 3){
+							pedirDato(apellidoP, MAX_APELLIDO, "Ingrese el apellido paterno: ", "Ingrese un apellido valido", FALSE);	
+						}else{
+							if(op == 4){
+								pedirDato(apellidoM, MAX_APELLIDO, "Ingrese el apellido materno: ", "Ingrese un apellido valido", FALSE);	
+							}else{
+								if(op == 5){
+									pedirDato(carrera, MAX_CARRERA, "Ingrese la carrera: ", "Ingrese una carrera valida", FALSE);
+								}else{
+									if(op == 6){
+										pedirDato(opcion, MAX_EDAD, "Ingrese la edad: ", "Ingrese una edad valida", FALSE);
+										edad = atoi(opcion);
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+		alumnos[indice] = crearAlumno(matricula, nombre, apellidoP, apellidoM, carrera, edad);
 		return 1;
 	}else{
 		ponerColor(ERROR_COLOR);
-		ponerTextoEnXY(10, 16, "La matricula no existe");
+		ponerTextoEnXY(MAXWIDHT/2-16, 16, "La matricula no existe");
 		ponerColor(RESET_COLOR);
 	}
 
