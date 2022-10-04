@@ -1,16 +1,21 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
+#include "lista.h"
+
+#ifdef __unix__
+
 #include <termio.h>
 #include <sys/ioctl.h>
-#include "lista.h"
+char getch(void);
+
+#endif
 
 typedef struct lista listas;
 typedef struct cadena cadenas;
 
 #define STDINFD  0
 
-char getch(void);
 
 int main(int argc, char const *argv[])
 {
@@ -21,18 +26,24 @@ int main(int argc, char const *argv[])
 	int bandera = 1;
 
 	while(bandera){
-		buff = getch();
+		buff = getwchar();
+
 		if(buff == '\n'){
 			bandera = 0;
 		}else{
 			agregarCadena(&miCadena, buff);
 		}
-	}	
+	}
 
+	imprimirCadena(miCadena);
+	printf("\n%d\n",obtenerLongitud(miCadena));
+	printf("%s\n",obtenerCadena(miCadena));
 	imprimirCadena(miCadena);
 
 	return 0;
 }
+
+#ifdef __unix__
 
 char getch(void) {
   char c;
@@ -52,3 +63,5 @@ char getch(void) {
   ioctl(STDINFD,TCSETA,&param_ant);
   return c;
 }
+
+#endif

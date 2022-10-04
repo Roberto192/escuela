@@ -62,3 +62,48 @@ int imprimirCadena(struct cadena *cad){
 
 	return 1;
 }
+
+int obtenerLongitud(struct cadena *cad){
+	int i = 0;
+	int bandera = 1;
+	struct cadena **aux;
+
+	aux = &cad;
+
+	if(*aux == NULL){
+		return 0;
+	}
+
+	while(bandera){
+		if(cad->next == NULL){
+			bandera = 0;
+		}else{
+			cad = cad->next;
+		}
+		
+		i++;
+	}
+
+	cad = *aux;
+	return i;
+}
+
+char *obtenerCadena(struct cadena *cad){
+	int lon = obtenerLongitud(cad);
+	char *aux;
+	int i = 0;
+
+	if(lon == 0){
+		return NULL;
+	}
+
+	aux = (char *) malloc(lon + 1);
+
+	while(i < lon){
+		aux[i++] = cad->c;
+		cad = cad->next;
+	}
+
+	aux[i] = '\0';
+	return aux;
+}
