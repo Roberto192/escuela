@@ -2,12 +2,16 @@
 #include <stdlib.h>
 #include <unistd.h>
 
+#define JUMPLINE putchar('\n');
 
 #ifdef __unix__
 
 #include <termio.h>
 #include <sys/ioctl.h>
+
 #define STDINFD  0
+#define JUMPLINE_CHAR '\n'
+#define BACKSPACE_CHAR 127
 
 char leerCaracter(int);
 
@@ -38,11 +42,19 @@ char leerCaracter(int echo) {
 
 #ifdef __WIN32
 
-char leerCaracter(int);
+	#include <conio.h>
 
-char leerCaracter(int echo){
-	return getwchar();
-}
+	#define JUMPLINE_CHAR 13
+	#define BACKSPACE_CHAR 8
+
+	char leerCaracter(int);
+
+	char leerCaracter(int echo){
+		char c = getch();
+		if(echo)
+			putchar(c);
+		return c;
+	}
 
 #endif
 

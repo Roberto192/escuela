@@ -5,7 +5,7 @@
 #define TRUE 1
 #define FALSE 0
 
-#define stdlin putc(10, stdout)
+#define JMPL putc(10, stdout)
 
 int longitud(char *);
 void quitarCaracteres(char *, int);
@@ -78,7 +78,7 @@ void imprimirCadenaHorizontal(char *cadena){
 	while(*cadena != '\0'){
 		(++i > 37)? i = 31 : i;
 		putc(*(cadena++), stdout);
-		stdlin;
+		JMPL;
 	}
 }
 
@@ -89,7 +89,7 @@ void recortarPorDerechaCadena(char *cadena){
 
 	while(lon != -1){
 		imprimirCadena(aux);
-		stdlin;
+		JMPL;
 		aux[lon--] = '\0';
 	}
 
@@ -136,7 +136,7 @@ void recortarPorIzquierdaCadena(char *cadena){
 	printf("%p\n",cadena);*/
 	for (i = 0; i < lon + 1; i++){
 		imprimirCadena(aux);
-		stdlin;
+		JMPL;
 		quitarUnCaracter(aux, cadena[i]);
 	}
 	free(aux);
@@ -215,7 +215,7 @@ void vocales(char *cadena, int si){
 		}
 	}
 
-	stdlin;
+	JMPL;
 }
 
 void mayusculas(char *cadena){
