@@ -8,7 +8,7 @@
 #define stdlin putc(10, stdout)
 
 int longitud(char *);
-void quitarCaracter(char *, int);
+void quitarCaracteres(char *, int);
 void imprimirCadena(char *);
 char *voltearCadena(char *);
 void imprimirCadenaHorizontal(char *);
@@ -17,7 +17,16 @@ void recortarPorIzquierdaCadena(char *);
 void quitarUnCaracter(char *, char);
 void vocales(char *, int);
 void mayusculas(char *);
+void minusculas(char *);
+void quitarEspaciosExtras(char *);
+void Capitalizar(char *);
+char *quitarEspacios(char *);
 
+int longitudMax(char *cadena){
+	int i;
+	for (i = 0; cadena[i] != '\0' ; i++);
+	return i;
+}
 
 int longitud(char *cadena){
 	int i;
@@ -25,7 +34,7 @@ int longitud(char *cadena){
 	return i - 1;
 }
 
-void quitarCaracter(char *cadena, int x){
+void quitarCaracteres(char *cadena, int x){
 	int i;
 	char *aux = (char *) malloc(longitud(cadena));
 	char *mem = &(*aux);
@@ -91,7 +100,7 @@ void quitarUnCaracter(char *cadena, char caracter){
 	int i;
 	int lon = longitud(cadena);
 	if(lon != 0){
-		char *aux = malloc(lon);
+		char *aux = (char *) malloc(lon);
 		char *mem = &(*aux);
 		int bandera = 0;
 	
@@ -217,4 +226,71 @@ void mayusculas(char *cadena){
 			}
 		}
 	}
+}
+
+void minusculas(char *cadena){
+	int i;
+	for (i = 0; i < longitud(cadena) + 1; ++i){
+		if(cadena[i] >= 'A'){
+			if(cadena[i] <= 'Z'){
+				cadena[i] += 32;
+			}
+		}
+	}
+}
+
+void quitarEspaciosExtras(char *cadena){
+	int i;
+	int lon;
+
+	lon = longitud(cadena);
+	
+	if(cadena[lon] == '\n'){
+		if(cadena[lon - 1] == ' '){
+			cadena[lon] = '\0';
+			cadena[lon - 1] = '\n';
+		}
+	}
+
+	if(cadena[lon] == ' '){
+		cadena[lon] = '\0';
+	}
+
+	if(cadena[0] == ' '){
+		for(i = 0; i < lon; i++){
+			cadena[i] = cadena[i + 1];
+		}
+		cadena[lon] = '\0';
+	}
+
+}
+
+void Capitalizar(char *cadena){
+	int i;
+	int lon = longitud(cadena);
+	int centinela = 1;
+	quitarEspaciosExtras(cadena);
+	
+	for (i = 0; i < lon; i++){
+		if(centinela){
+			if(cadena[i] >= 'a'){
+				if(cadena[i] <= 'z'){
+					cadena[i] -= 32;
+					centinela = 0;
+				}
+			}
+		}
+
+		if(cadena[i] == ' '){
+			centinela = 1;
+		}
+	}
+
+}
+
+char *quitarEspacios(char *cadena){
+	char *miCadena = malloc(longitudMax(cadena));
+	strcpy(miCadena, cadena);
+	quitarCaracteres(miCadena, ' ');
+	return miCadena;
 }
