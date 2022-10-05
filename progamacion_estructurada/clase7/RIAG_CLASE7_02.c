@@ -25,7 +25,7 @@ int main(int argc, char const *argv[])
 	printf("Sin espacios:\n");
 	imprimirCadena(quitarEspacios(miCadena));
 	stdlin;
-	printf(ge)
+	printf("a");
 
 	return 0;
 }
