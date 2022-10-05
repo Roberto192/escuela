@@ -9,23 +9,27 @@ int main(int argc, char const *argv[])
 	mayusculas(miCadena);
 	imprimirCadena(miCadena);
 	stdlin;
+	stdlin;
 	printf("minuscula:\n");
 	minusculas(miCadena);
 	imprimirCadena(miCadena);
+	stdlin;
 	stdlin;
 	printf("Capitalizacion:\n");
 	Capitalizar(miCadena);
 	imprimirCadena(miCadena);
 	stdlin;
+	stdlin;
 	printf("longitud de %s -> %d",miCadena,longitud(miCadena) + 1);
+	stdlin;
 	stdlin;
 	printf("Reversa:\n");
 	imprimirCadena(voltearCadena(miCadena));
 	stdlin;
+	stdlin;
 	printf("Sin espacios:\n");
 	imprimirCadena(quitarEspacios(miCadena));
 	stdlin;
-	printf("a");
 
 	return 0;
 }

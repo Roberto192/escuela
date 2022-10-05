@@ -45,6 +45,7 @@ void quitarCaracteres(char *cadena, int x){
 		}
 	}
 
+	*aux = '\0';
 	aux = mem;
 	strcpy(cadena, aux);
 
@@ -289,7 +290,7 @@ void Capitalizar(char *cadena){
 }
 
 char *quitarEspacios(char *cadena){
-	char *miCadena = malloc(longitudMax(cadena));
+	char *miCadena = (char *) malloc(longitudMax(cadena));
 	strcpy(miCadena, cadena);
 	quitarCaracteres(miCadena, ' ');
 	return miCadena;
