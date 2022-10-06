@@ -21,6 +21,7 @@ void minusculas(char *);
 void quitarEspaciosExtras(char *);
 void Capitalizar(char *);
 char *quitarEspacios(char *);
+int abc(char *);
 
 int longitudMax(char *cadena){
 	int i;

@@ -2,7 +2,7 @@
 
 struct lista{
 
-	cadenas *matricula;
+	static cadenas matricula;
 	struct lista *next;
 
 };
@@ -10,6 +10,7 @@ struct lista{
 typedef struct lista listas;
 
 struct lista *crearLista(cadenas *);
+
 void insertar(struct **lista, struct cadena);
-void borrar(struct **lista, );
+//void borrar(struct **lista, );
 void listar();
