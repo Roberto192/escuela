@@ -9,9 +9,14 @@
 #include <termio.h>
 #include <sys/ioctl.h>
 
+#define CLEAR system("clear");
 #define STDINFD  0
 #define JUMPLINE_CHAR '\n'
 #define BACKSPACE_CHAR 127
+
+#ifdef __UNIX
+
+#endif
 
 char leerCaracter(int);
 
@@ -44,6 +49,7 @@ char leerCaracter(int echo) {
 
 	#include <conio.h>
 
+	#define CLEAR system("cls");
 	#define JUMPLINE_CHAR 13
 	#define BACKSPACE_CHAR 8
 

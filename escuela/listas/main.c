@@ -1,8 +1,6 @@
 #include "struct_alumnos.h"
 #include <stdio.h>
 
-#define CLEAR system("clear");
-
 void leerMatricula(char *, int);
 
 int main(int argc, char const *argv[])
@@ -85,7 +83,7 @@ void leerMatricula(char *matricula, int tam){
 			bandera = 0;
 		}
 				
-		if(c == '\n'){
+		if(c == '\r'){
 			if(i >= tam - 6){
 				bandera = 0;
 			}
