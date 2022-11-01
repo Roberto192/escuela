@@ -12,6 +12,9 @@ TODO*.*
 .editorconfig
 .gitattributes
 *.elf
+.data
+.txt
+.dat
 null
 
 ################################
@@ -22,3 +25,4 @@ test/
 testeo/
 simon_dice/
 print/
+.fleet/
