@@ -1,9 +1,3 @@
-
-/*
-    --------->     Libreria     <----------
-    (Funciones de validar cadenas, cadenas)
-*/
-
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -101,66 +95,68 @@ void validar(char cadena[], int n, int m){
 			if(i < n){
 				if(c == (char) 164){
 					putchar(c);
-					cadena[j++] = c;
+					cadena[j++] = c + 1;
 					espacio = 1;
 				}
 
 				if (c == (char) 165){	
 					putchar(c);
-					cadena[j++] = c;
+					cadena[j++] = c + 1;
 					espacio = 1;
 				}
 
-                if(m == 1){
+           if(m == 1){
     				if(c >= 'a'){
 					   if(c <= 'z'){
 						  putchar(c);
-						  cadena[j++] = c;
+						  cadena[j++] = c + 1;
 						  espacio = 1;
 					   }
 				    }
                 }
                 
-                if(m == 0){
+           if(m == 0){
 				    if(c >= 'A'){
 					   if(c <= 'Z'){
 						  putchar(c);
-						  cadena[j++] = c;
+						  cadena[j++] = c + 1;
 						  espacio = 1;
 					   }
 				    }                        
-                }
+          }
                 
-                if(m == 2){
+           if(m == 2){
     				if(c >= 'a'){
 					   if(c <= 'z'){
 						  putchar(c);
-						  cadena[j++] = c;
+						  cadena[j++] = c + 1;
 						  espacio = 1;
 					   }
 				    }
 				    
 				    if(c >= 'A'){
-					   if(c <= 'Z'){
-						  putchar(c);
-						  cadena[j++] = c;
-						  espacio = 1;
-					   }
-				    }                        
-                }
+						   if(c <= 'Z'){
+							  putchar(c);
+							  cadena[j++] = c + 1;
+							  espacio = 1;
+						   }
+					  }                        
+       	   }
                 
 				if(c == ' '){
 					if(espacio){
 						putchar(c);
-						cadena[j++] = ' ';
+						cadena[j++] = ' ' + 1;
 						espacio = 0;
 					}
 				}
 
 			}else{
+				putchar('\n');
 				band = 0;
 			}
 		}else{
+			putchar('\n');
 			band = 0;
 		}
 	}
@@ -168,19 +164,106 @@ void validar(char cadena[], int n, int m){
 	cadena[j] = '\0';
 }
 
-void imprimirArreglo(int miArreglo[], int n){
-    int i;
+int validarNumeroISR(char msg[], int positivo){
     
-    for(i = 0; i < n; i++){
-        printf("%i [%d]\n",i,miArreglo[i]);
+	int bandera = 1; 
+	int num;
+	char c;
+    
+	 if(positivo){
+       
+		while(bandera){
+
+			system("cls");
+			puts(msg);
+			num = leerEnteroPositivo();
+      
+			printf("Es correcto %d (y/n) ",num);
+			c = getch();
+
+  		if(c == 'y'){
+				putchar(c);
+				bandera = 0;
+			}else{
+				if(c == 'n'){
+					putchar(c);
+				}
+			}
+   }
+		
+	}else{
+    
+		while(bandera){
+
+			system("cls");
+			puts(msg);
+			num = leerEntero();
+      
+			printf("Es correcto %d (y/n) ", num);
+			c = getch();
+
+      if(c == 'y'){
+				putchar(c);
+				bandera = 0;
+			}else{
+				if(c == 'n'){
+					putchar(c);
+				}
+		  }
+    }
+	}
+	
+	return num;
+}
+
+int validarNumeroICR(char msg[], char msgError[], int positivo, int r1, int r2){
+    int num;
+    
+    puts(msg);
+    
+    if(positivo){
+        while(1){
+            num = leerEnteroPositivo();
+        
+            if(num >= r1 && num <= r2){
+                return num;
+            }else{
+                puts(msgError);
+            }
+        }
+    }else{
+        while(1){
+            
+            num = leerEntero();
+        
+            if(num >= r1 && num <= r2){
+                return num;
+            }else{
+                puts(msgError);
+            }
+        }
     }
 }
 
-void llaa(int miArreglo[], int n, int r1, int r2){//Llenar Arreglo Aleatorio
-    int i;
-    
-    for(i = 0; i < n; i++){
-        miArreglo[i] = (rand() % (r2 - r1)) + r1;
-    }
-    
+void validarTexto(char msg[], char variable[], int n, int t){
+	int controlador = 1;
+	char c;
+	
+	while(controlador){
+		system("cls");
+		puts(msg);
+		validar(variable, n, t);
+		printf("Es correcto %s (y/n)",variable);
+		
+		c = getch();
+		
+		if(c == 'y'){
+			putchar(c);
+			controlador = 0;
+		}else{
+			if(c == 'n'){
+				putchar(c);
+			}
+		}
+	}
 }

@@ -14,17 +14,22 @@ int main(int argc, char const *argv[])
 	for(int i = 0; i < (int) sizeof(arreglo)/sizeof(int); i++){
 		printf("%p\n",&arreglo[i]);
 	}*/
-
-	int *i,a;
-
-	i = (int *) malloc(sizeof(int));
-
-	i = &a;
-
-	printf("%p\n",&a);
-	printf("%p\n",&i);
-	printf("%p\n",&(*i));
-	printf("%p\n",&a);
-
+	
+	char *miCadena = malloc(5);
+	char *c;
+	
+	miCadena = "Hola\0";
+	printf("%s\n",miCadena);
+	printf("%p\n",&(*miCadena));
+	printf("%p\n",&miCadena);
+	printf("%p\n",&(miCadena));
+	
+	scanf("%p",&c);
+	printf("%s\n",c);
+	printf("%c",*(c++));
+	printf("%c",*(c++));
+	printf("%c",*(c++));
+	printf("%c",*(c++));
+	
 	return 0;
 }
