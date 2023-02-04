@@ -84,7 +84,7 @@ void ponerTextoEnXY(short x, short y,const char *texto){
 }
 
 void ponerTextoCentradoY(short y,const char *texto){
-	ponerTextoEnXY( 25 - strlen(texto)/ 2, y, texto);
+	ponerTextoEnXY( MAXWIDHT - strlen(texto)/ 2, y, texto);
 }
 
 
@@ -96,7 +96,7 @@ void ponerCaracterEnXY(short x, short y, char c){
 void ponerLineaEnHorizontal(short x, short startY,short limitY, short type){
 
 	int y;
-	char c = 205;
+	char c = (char) 205;
 
 	switch(type){
 		case 2:
@@ -106,7 +106,7 @@ void ponerLineaEnHorizontal(short x, short startY,short limitY, short type){
 			c = '*';
 		break;
 		default:
-			c = 205;
+			c = (char)  205;
 	}
 
 	for (y = startY; y < limitY; y++)
@@ -121,7 +121,7 @@ void ponerLineaEnVertical(short y, short startX,short limitX, short type){
 
 	int x;
 
-	char c = 186;
+	char c = (char) 186;
 
 	switch(type){
 		case 2:
@@ -193,9 +193,11 @@ void ponerMenuEnXY(char *menu[], short y, short cantidad){
 
 	system("cls");
 	int i;
+	int pos = (MAXWIDHT / 2) - strlen(menu[i]);
 
 	for (i = 0; i < cantidad; i++){
-		iraXY(MAX);
+		iraXY(pos,y);
+		printf("%d %s", i+1,menu[i]);
 		y++;
 	}
 

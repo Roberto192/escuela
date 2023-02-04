@@ -1,3 +1,4 @@
+#pragma once
 #include "rosaak.h"
 
 #define MAX_CURP 19
@@ -200,7 +201,6 @@ int siExisteEliminala(char cadena[], int n, char datoAEliminar[],int m){
   }
   
   if(m == j){
-    printf("%s %sYa valio\n",cadena, datoAEliminar);
     for(j = n + 1, i = 0; j < longitud(cadena)+1; j++, i++){
       cadena[i] = cadena[j];
     }
@@ -208,7 +208,6 @@ int siExisteEliminala(char cadena[], int n, char datoAEliminar[],int m){
     return 1;
   }else{
     return 0;
-    printf("No es: %d %d  %s\n", j, m,datoAEliminar);
   }
 }
 
@@ -294,20 +293,34 @@ void crearCurp(char CURP[], char nombre_s[], char apellido_p[], char apellido_m[
     }
   }
   
-  printf("-> %s\n",apellido_buff);
+  cuantosEsp = cuantosHayDe(nombre_buff, longitud(nombre_buff), ' ');
+  if(cuantosEsp > 0){
+    for(i = cuantosEsp;i != 0; i--){
+      posEsp = obtPosCar(nombre_buff, longitud(nombre_buff), ' ');
+      if(posEsp != -1){
+        for(j = 0; j < TAMPRE - 1; j++){
+          controlador = siExisteEliminala(nombre_buff, posEsp, preposiciones[j], longitud(preposiciones[j])+ 1);
+          if(controlador){
+            j = TAMPRE;
+          }
+        }
+      }
+    }
+  }
+
   
   strcpy(vocalesApp, apellido_buff);
   strcpy(consonantesApp, apellido_buff);
   strcpy(consonantesApm, apellido_buffm);
   strcpy(consonantesN, nombre_buff);
   
-  printf("Analizando datos...\n");
-  printf("Nombre -> %s\n", nombre_buff);
-  printf("Apellido Paterno -> %s\n",apellido_buff);
-  printf("Apellido materno -> %s\n",apellido_buffm);
-  printf("Fecha de nacimiento -> %s/%s/%s\n",anyo, mes, dia);
-  printf("Estado -> %s\n",estado);
-  printf("Sexo -> %c\n",sexo);
+  //printf("Analizando datos...\n");
+  //printf("Nombre -> %s\n", nombre_buff);
+  //printf("Apellido Paterno -> %s\n",apellido_buff);
+  //printf("Apellido materno -> %s\n",apellido_buffm);
+  //printf("Fecha de nacimiento -> %s/%s/%s\n",anyo, mes, dia);
+  //printf("Estado -> %s\n",estado);
+  //printf("Sexo -> %c\n",sexo);
   
   vocales(vocalesApp,1);  
   vocales(consonantesApp, 0);
@@ -330,8 +343,15 @@ void crearCurp(char CURP[], char nombre_s[], char apellido_p[], char apellido_m[
   CURP[13] = consonantesApp[1];
   CURP[14] = consonantesApm[1];
   CURP[15] = consonantesN[1];
-  CURP[16] = (char) rand() % (int) 27 + (int) 'A';
-  CURP[17] = (char) rand() % 10 + '0';
+  CURP[16] = (char) (rand() % (int) 26) + (int) 'A';
+  CURP[17] = (char) (rand() % 10) + '0';
+  CURP[18] = '\0';
+  
+  //printf("Tam: %d\n", longitud(consonantesN));
+  
+  if(CURP[15] == '\0'){
+    CURP[15] = 'X';
+  }
   
   if(esVocal(CURP[0])){
     CURP[1] = vocalesApp[1];

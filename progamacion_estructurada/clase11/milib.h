@@ -1,4 +1,4 @@
-
+#pragma once
 #include <stdio.h>
 #include <string.h>
 #include "validar.h"
@@ -28,12 +28,12 @@ int menu(){
   
   system("cls");
   
-  char men[7][20] = {
-    "AGREGAR",
-    "AGREGAR MANUAL",
-    "ELIMINAR REGISTRO",
-    "BUSCAR",
-    "ORDENAR",
+  char men[7][30] = {
+    "Cargar",
+    "Buscar por matricula",
+    "Buscar por CURP",
+    "Ordenar por Matricula",
+    "Ordenar por CURP",
     "IMPRIMIR",
     "SALIR"
   };
@@ -49,47 +49,40 @@ int menu(){
   return leerEntero();  
 }
 
-int agregarAleatorio(Talumno alumnos[], int tm, int r1, int r2){
+void agregarAleatorio(Talumno *alumno){
   Tnombre nombresM[15] = {"MARIA DE LA LUZ", "GUADALUPE", "VALENTINA", "ASUCENA", "VALERIA", "DE LA TRINIDAD", "JUANA", "VALENTINA", "SOPHIA", "MIA", "MAYDA", "LILIANA", "MONSERRAT", "SUSANA", "MARIA"};
   Tnombre nombresH[15] = {"XHON XINA", "ROBERTO", "SHELONG MUSK", "JOSE", "VICTOR", "HUGO", "JESUS", "HAZAEL", "AZAEL", "TERIYAKI", "JUAN", "ADOLFO", "MARADONA", "PITER", "ARIEL"};
   Tapellido apellidos[15] = {"LOPEZ", "KIM", "RAMIREZ", "TARANTINO", "BANDA", "GUERRERO", "FREEMAN", "FREEFAYER", "POTTER", "HERNANDEZ", "BORJA", "KHALIFA", "ARIAS", "DELGADO", "RODRIGUEZ"};
   
   int i;
-  
-  if(r2 > tm){
-    return -1;
-  }
 
-  for(i = r1; i < r2; i++){
-    alumnos[i].sexo = rand() % 2 + 1;
-    if(alumnos[i].sexo == 1){
-      strcpy(alumnos[i].nombre, nombresH[rand() % 15]);
+    alumno->sexo = rand() % 2 + 1;
+    if(alumno->sexo == 1){
+      strcpy(alumno->nombre, nombresH[rand() % 15]);
     }else{
-      strcpy(alumnos[i].nombre, nombresM[rand() % 15]);
+      strcpy(alumno->nombre, nombresM[rand() % 15]);
     }
     
-    strcpy(alumnos[i].apellido_p, apellidos[rand() % 15]);
-    strcpy(alumnos[i].apellido_m, apellidos[rand() % 15]);
-    alumnos[i].edad = (rand() % 20) + 18;
-    alumnos[i].matricula =  (1000000 * (rand() % 3) + 1) + (100000 * (rand() % 10)) + (10000 * (rand() % 10)) + (1000 * (rand() % 10)) + (100 * (rand() % 10)) + (10 * (rand() % 10)) + (rand() % 10);
-    alumnos[i].estado = TRUE;
-    
-  }
-  
-  return 0;  
+    strcpy(alumno->apellido_p, apellidos[rand() % 15]);
+    strcpy(alumno->apellido_m, apellidos[rand() % 15]);
+    alumno->edad = (rand() % 20) + 18;
+    alumno->matricula =  (1000000 * (rand() % 3) + 1) + (100000 * (rand() % 10)) + (10000 * (rand() % 10)) + (1000 * (rand() % 10)) + (100 * (rand() % 10)) + (10 * (rand() % 10)) + (rand() % 10);
+    alumno->estado = TRUE;  
 }
 
 void imprimirReg(Talumno alumno){
-  printf("\n-----------------------------------------------------\n");
-  printf("Matricula: %lu\n", alumno.matricula);
-  printf("Nombre completo: %s %s %s\n", alumno.nombre, alumno.apellido_p, alumno.apellido_m);
-  if(alumno.sexo == 1){
-    printf("Sexo: Hombre\n");
-  }else{
-    printf("Sexo: Mujer\n");
+ 
+  if(alumno.estado == TRUE){
+    printf("\n-----------------------------------------------------\n");
+    printf("Matricula: %lu\n", alumno.matricula);
+    printf("Nombre completo: %s %s %s\n", alumno.nombre, alumno.apellido_p, alumno.apellido_m);
+    if(alumno.sexo == 1){
+      printf("Sexo: Hombre\n");
+    }else{
+      printf("Sexo: Mujer\n");
+    }
+    printf("Edad: %d\n", alumno.edad);
   }
-  printf("Edad: %d\n", alumno.edad);
-  
 }
 
 void imprimirDatos(Talumno alumnos[], int tam, int ini, int fin){

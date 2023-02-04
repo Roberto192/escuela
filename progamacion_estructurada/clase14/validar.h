@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <conio.h>
 
 #define MAX_INT 10
 #define MAX_DATE 11
@@ -24,7 +25,7 @@ int leerEnteroPositivo(){
         
     while(controlador){
         c = getch();
-            
+        
         if(c >= '0'){
             if(c <= '9'){
                 putchar(c);
@@ -74,8 +75,11 @@ int leerEntero(){
             }else{  
                 if(c == '\r'){
                     putchar('\n');
-                        numeroEnCadena[i] = '\0';           
-                        controlador = 0;
+                    numeroEnCadena[i] = '\0';
+                    controlador = 0;
+                    if(!i){
+                      return -1;
+                    }
                 }
             }
         }

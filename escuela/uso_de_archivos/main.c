@@ -48,15 +48,15 @@ int main(){
   srand(time(NULL));
   
   while(centinela){
-    ponerMenuEnXY(_menu, 2, 8);
-    ponerCuadradoEnXY(2, 2, 50, 20, 3);
+    ponerMenuEnXY(_menu, 3, 8);
+    ponerCuadradoEnXY(2, 2, 32, 20, 3);
     opcion = leerEnteroPositivo();
     
     switch(opcion){
       case 1:
         crearArchivo(FILE_NAME_DAT, "wb");
         escribirDatos(MAX_DATOS, "rb+");
-        printf("Archivo creado!!!\n");
+        ponerTextoEnXY(2,22, "Archivo creado exitosamente\n");
         break;
       case 2:
         crearArchivo(FILE_NAME_TXT, "w");
@@ -84,11 +84,11 @@ int main(){
       case 8:
         centinela = 0;
       break;
-    }
-    system("pause");
+    }    
   }
   
   system("cls");
+  iraXY(18, 20);
   return 0;
 }
 
